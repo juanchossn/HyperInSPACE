@@ -1,4 +1,4 @@
-# Hyperspectral In situ Support for PACE - Community Processor (HCP)
+# HyperCP - HyperInSpace Community Processor
 <html lang="en">
 
 <center><img src="Data/Img/banner2.png" alt="Banner"></center>
@@ -14,8 +14,13 @@ and transparent data processing for the ocean color remote sensing community, pa
 such radiometric data to SeaBASS. Radiometry processed in HCP are used for water optical characterization, 
 ocean color product retrieval algorithm development, and orbital platform validation.
 
-Currently, HCP supports <a href='https://www.seabird.com/'>Sea-Bird Scientific</a> HyperSAS packages with and 
+Currently, HyperCP supports <a href='https://www.seabird.com/'>Sea-Bird Scientific</a> HyperSAS packages with and 
 without SolarTracker or pySAS platforms as well as [TriOS](https://www.trios.de/en/radiometers.html) used in manual configuration. If you are interested in integrating support for your platform, contact us at the email addresses below the copyright.
+
+HyperCP is an **open science**, **open-source** collaboration to facilitate community development of a processor for in situ above-water radiometry 
+for aquatic biogeochemistry applications, algorithm development and satellite validations. The Collaboration aims to achieve the highest quality in situ 
+measurement processing, extensions to new field instrument platforms, measurement uncertainty propagation according to metrological standards, 
+and other improvements to the algorithms and the processor package.
 
 ## Version 1.1.2 (see Changelog.md)
 
@@ -45,12 +50,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 Clone this repository (branch: "master") to a convenient directory on your computer. When HCP/Main.py is launched for the first time, sub-directories will be created and databases downloaded and moved into them as described below. No system files will be changed.
 
-HyperInSPACE Community Processor (HCP) requires Python 3.X installed on a Linux, MacOS, or Windows computer. The <a href='https://www.anaconda.com/'>Anaconda</a> distribution (or <a href='https://docs.conda.io/en/latest/miniconda.html'>Miniconda</a>) is encouraged. (If you are unfamiliar with Anaconda, a nice walkthrough can be found [here](https://youtu.be/YJC6ldI3hWk).)
+HyperInSpace Community Processor (HyperCP) requires Python 3.X installed on a Linux, MacOS, or Windows computer. The <a href='https://www.anaconda.com/'>Anaconda</a> distribution (or <a href='https://docs.conda.io/en/latest/miniconda.html'>Miniconda</a>) is encouraged. (If you are unfamiliar with Anaconda, a nice walkthrough can be found [here](https://youtu.be/YJC6ldI3hWk).)
 
 All of the package dependencies are listed in the hcp.yml file included with the package. To make sure you have all of the necessary dependencies, navigate to the HCP directory and type
 
 ```
-prompt$ conda env create -f hcp.yml
+prompt$ conda env create -f hypercp.yml
 ```
 
 and follow the prompts to install the additional package dependencies on your machine within the new virtual environment. When completed you should be in the virtual environment (hcp) and ready to run the package. To return to the environment later before launching the program, type
@@ -72,9 +77,9 @@ To report an issue, please submit here: https://github.com/nasa/HyperInSPACE/iss
 
 <center><img src="Data/Img/banner.jpg" alt="banner"></center>
 
-HCP is a Main-View-Controller Python package with a GUI that can be launched in several ways, such as by navigating to the project folder on the command line and typing
+HyperCP is a Main-View-Controller Python package with a GUI that can be launched in several ways, such as by navigating to the project folder on the command line and typing
 ```
-(hcp) prompt$ python Main.py
+(hypercp) prompt$ python Main.py
 ```
 However you launch the GUI, *watch for important feedback at the command line terminal* in addition to informational GUI windows.
 
@@ -98,7 +103,7 @@ When you first launch the software, it will need to download a large (2.3 GB) da
 
 ### Quick Start Overview
 1. Identify the research cruise, relevant calibration files, and ancillary data files to be used in processing
-2. Launch HCP and set up the Main window for data directories and the ancillary file
+2. Launch HyperCP and set up the Main window for data directories and the ancillary file
 3. Create a new Configuration (or edit and existing Configuration)
 4. Add and enable only *relevant* calibration and instrument files to the Configuration; there is no such thing as a standard instrument package
 5. Choose appropriate processing parameters for L1A-L2 (do not depend on software defaults; there is no such thing as a standard data collection)
