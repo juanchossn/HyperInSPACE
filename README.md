@@ -7,7 +7,7 @@ HyperCP is an open science, open-source Collaboration to facilitate further comm
 
 The goal of HyperCP is to facilitate consistent, rigorous, traceable and flexible in situ radiometry data processing. The package is developed using state-of-the-art algorithms, protocols for quality assurance, and the uncertainty propagation according to metrological standards. Data output are formatted to text files for submission to the [SeaBASS](https://seabass.gsfc.nasa.gov/) and [OCDB](https://ocdb.eumetsat.int/) databases and saved as comprehensive HDF5 records with automated processing reports
  
-Currently, HyperCP supports two hyperspectral radiometers: [Sea-Bird Scientific](https://www.seabird.com/) HyperSAS packages with and without SolarTracker or pySAS platforms, as well as [TriOS](https://www.trios.de/en/radiometers.html) used in manual configuration . Refer to ‘Guidelines for Collaboration on the HyperInSPACE Community Processor (HyperCP)’ if you are interested in Collaboration to integrate other in situ platforms. Contact emails are also included on this page addresses below the Copyright section.
+Currently, HyperCP supports two hyperspectral radiometers: [Sea-Bird Scientific](https://www.seabird.com/) HyperSAS packages with and without SolarTracker or pySAS platforms, as well as [TriOS](https://www.trios.de/en/radiometers.html) used in manual configuration . Refer to the [Guidelines](HyperCP_Project_guidelines.md) if you are interested in Collaboration to integrate other in situ platforms. Contact emails are also included on this page addresses below the Copyright section.
 
 
 ## Version 1.1.2 (see Changelog.md)
