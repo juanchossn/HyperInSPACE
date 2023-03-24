@@ -1,24 +1,14 @@
 # HyperCP - HyperInSpace Community Processor
 <html lang="en">
 
-HyperInSpace Community Processor is designed to provide in situ support for hyperspectral missions such as 
-<a href='https://pace.gsfc.nasa.gov/'>PACE</a> but also multispectral missions such as 
-[Sentinel-3](https://sentinels.copernicus.eu/web/sentinel/missions/sentinel-3) by processing automated and manual, above-water, 
-hyperspectral ocean color radiometry data using state-of-the-art methods and protocols for quality assurance, 
-uncertainty estimation/propagation, sky/sunglint correction, convolution to satellite wavebands, and ocean color product
-retrieval. Data output are formatted to text files for submission to the [SeaBASS](https://seabass.gsfc.nasa.gov/) and [OCDB](https://ocdb.eumetsat.int/) databases and saved as 
-comprehensive HDF5 records with automated processing reports. The package is designed to facilitate rigorous, flexible,
-and transparent data processing for the ocean color remote sensing community, particularly PIs funded by NASA to submit 
-such radiometric data to SeaBASS. Radiometry processed in HCP are used for water optical characterization, 
-ocean color product retrieval algorithm development, and orbital platform validation.
+HyperInSpace Community Processor (HyperCP) is a community tool for processing in situ automated and manual, above-water, ocean color radiometry measurements. HyperCP is designed to provide in situ support for hyperspectral missions such as [PACE](https://pace.gsfc.nasa.gov/), multispectral missions such as [Sentinel-3](https://sentinels.copernicus.eu/web/sentinel/missions/sentinel-3), and all international missions with interest in aquatic biogeochemistry, algorithm development and satellite validations. 
 
-Currently, HyperCP supports <a href='https://www.seabird.com/'>Sea-Bird Scientific</a> HyperSAS packages with and 
-without SolarTracker or pySAS platforms as well as [TriOS](https://www.trios.de/en/radiometers.html) used in manual configuration. If you are interested in integrating support for your platform, contact us at the email addresses below the copyright.
+HyperCP is an open science, open-source Collaboration to facilitate further community development and improvements to the algorithms and the processor package and to allow extensions to new field instrument platforms. See the [Guidelines for Collaboration on the HyperInSPACE Community Processor (HyperCP)](HyperCP_Project_guidelines.md) for information about the Collaboration, how to contribute, and how to reference HyperCP.
 
-HyperCP is an **open science**, **open-source** collaboration to facilitate community development of a processor for in situ above-water radiometry 
-for aquatic biogeochemistry applications, algorithm development and satellite validations. The Collaboration aims to achieve the highest quality in situ 
-measurement processing, extensions to new field instrument platforms, measurement uncertainty propagation according to metrological standards, 
-and other improvements to the algorithms and the processor package.
+The goal of HyperCP is to facilitate consistent, rigorous, traceable and flexible in situ radiometry data processing. The package is developed using state-of-the-art algorithms, protocols for quality assurance, and the uncertainty propagation according to metrological standards. Data output are formatted to text files for submission to the [SeaBASS](https://seabass.gsfc.nasa.gov/) and [OCDB](https://ocdb.eumetsat.int/) databases and saved as comprehensive HDF5 records with automated processing reports
+ 
+Currently, HyperCP supports two hyperspectral radiometers: [Sea-Bird Scientific](https://www.seabird.com/) HyperSAS packages with and without SolarTracker or pySAS platforms, as well as [TriOS](https://www.trios.de/en/radiometers.html) used in manual configuration . Refer to ‘Guidelines for Collaboration on the HyperInSPACE Community Processor (HyperCP)’ if you are interested in Collaboration to integrate other in situ platforms. Contact emails are also included on this page addresses below the Copyright section.
+
 
 ## Version 1.1.2 (see Changelog.md)
 
