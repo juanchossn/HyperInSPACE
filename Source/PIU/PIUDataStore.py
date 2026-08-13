@@ -785,7 +785,7 @@ class PIUDataStore:
 
     @staticmethod
     def interpolateSamples(Columns: OrderedDict, waves: np.array, newWavebands: np.array) -> np.array:
-                """
+        """
             calls interpolateSamples from utilities. Designed to interpolate PDF samples used in SB uncertainty processing.
 
             params:
