@@ -6,6 +6,7 @@ import re
 from pathlib import Path
 from datetime import datetime
 import urllib.request
+import threading
 
 import numpy as np
 import pandas as pd
@@ -15,9 +16,6 @@ from PyQt5.QtCore import pyqtSignal
 
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
-
-import threading
-import urllib.request
 
 from Source.ConfigFile import ConfigFile
 from Source.Controller import Controller
