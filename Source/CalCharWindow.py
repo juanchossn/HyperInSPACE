@@ -19,6 +19,10 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
 import threading
 import urllib.request
 
+from Source.ConfigFile import ConfigFile
+from Source.Controller import Controller
+from Source.CalibrationFileReader import CalibrationFileReader
+from Source import PACKAGE_DIR as CODE_HOME
 
 # Wrap the original urlopen with a fixed timeout argument (must be before ocdb import)
 # TODO: Ask OCDB team to implement a timeout option
@@ -32,23 +36,6 @@ def urlopen_default_timeout(*args, **kwargs):
 urllib.request.urlopen = urlopen_default_timeout
 
 from ocdb.api.OCDBApi import new_api, OCDBApi
-
-from Source.ConfigFile import ConfigFile
-from Source.Controller import Controller
-from Source.CalibrationFileReader import CalibrationFileReader
-from Source import PACKAGE_DIR as CODE_HOME
-
-
-# Wrap the original urlopen with a fixed timeout argument (must be before ocdb import)
-# TODO: Ask OCDB team to implement a timeout option
-time_out = 5
-original_urlopen = urllib.request.urlopen
-def urlopen_default_timeout(*args, **kwargs):
-    print('Modified urlopen called to enforce timeout of %s seconds' % time_out)
-    if 'timeout' in kwargs:
-        return urllib.request.urlopen(*args, **kwargs)  # If timeout is already specified, use it
-    return original_urlopen(*args, **kwargs, timeout=time_out)
-urllib.request.urlopen = urlopen_default_timeout
 
 class MplCanvas(FigureCanvasQTAgg):
 
@@ -1084,13 +1071,6 @@ class CalCharWindow(QtWidgets.QDialog):
             self.CheckPrePostButton.setDisabled(True)
 
         self.update_postCal()
-
-        # Copy it to calPath if not selected from there.
-        for file in file_paths:
-            dest = Path(ConfigFile.getCalibrationDirectory()) / os.path.basename(file)
-            if not dest.exists():
-                print(f'Copying {os.path.basename(file)} to {ConfigFile.getCalibrationDirectory()}')
-                shutil.copy(file, dest)
 
     def pre_post_cal_status(self):
         '''
