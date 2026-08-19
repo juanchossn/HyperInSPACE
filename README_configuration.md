@@ -501,9 +501,9 @@ Since v1.2.0, uncertainties in L2 products include systematic and random sensor 
 [this report](https://frm4soc2.eumetsat.int/sites/default/files/inline-files/FRM4SOC-2_D-10_v2.4_210042023_NPL_EUMETSAT_signed.pdf).
 
 Additional glint may be removed from the Rrs and nLw by subtracting the value in the NIR from the entire spectrum
-(Mueller et al. 2003 (NASA Protocols)). This approach, however, assumes neglible water-leaving radiance in the 750-800 nm
+(Mueller et al. 2003 (NASA Protocols)). This approach, however, assumes neglible water-leaving radiance in the 700-800 nm
 range (not true of turbid waters), and ignores the spectral dependence in sky glint, and **should therefore only be used
-in the clearest waters and with caution**. Here, a minimum in Rrs(750-800) or nLw(750-800) is found and subtracted from
+in the clearest waters and with caution**. Here, a minimum in Rrs(700-800) or nLw(700-800) is found and subtracted from
 the entire spectrum.
 
 An alternate NIR residual correction can be applied based on **Ruddick et al. 2005, Ruddick et al. 2006**. This utilizes
