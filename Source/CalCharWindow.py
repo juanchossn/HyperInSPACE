@@ -614,7 +614,7 @@ class CalCharWindow(QtWidgets.QDialog):
         # Nothing to download, return
         if len(missingFilesList) == 0:
             print('All cal./char. files were found under %s for the selected regime, nothing to download' % ConfigFile.getCalibrationDirectory())
-            return
+            return success
 
         # Initialise list to be inputted to the FidRadDB download function
         self.files_to_be_downloaded = []
