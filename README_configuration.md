@@ -268,11 +268,11 @@ This temperature can be derived in several ways:
 The table summarizes the options
 
 
-| Option                                         | Description                                                                      | Recommended if ...                                                                             |
-|------------------------------------------------|----------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| **Internal Thermistor**                        | Uses the built-in temperature sensor (available for SeaBird, DALEC or Trios-G2)  | ... thermistor is available                                                                    |
-| **T$_{air}$ + 2.5°C**                          | Estimates working temperature by adding 2.5°C to T$_{air}$                       | ... TriOS G1 and if T$_{air}$ is not available                                                 | 
-| **Caps-on Dark File (T$_{air}$ $\geq$ 30 °C)** | Estimate working temperature from dark current measurements taken with caps on   | ... TriOS G1 and if T$_{air}$ is available (falls back to "T$_{air}$+2.5" if T$_{air}$ < 30°C) |
+| Option                                         | Description                                                                    | Recommended if ...                                                                                                  |
+|------------------------------------------------|--------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| **Internal Thermistor**                        | Uses the built-in temperature sensor (available for SeaBird and DALEC)         | ... thermistor is available (still not supported for TriOS G2)                                                      |
+| **T$_{air}$ + 2.5°C**                          | Estimates working temperature by adding 2.5°C to T$_{air}$                     | ... thermistor is unavailable and caps-on darks unavailable                                                         | 
+| **Caps-on Dark File (T$_{air}$ $\geq$ 30 °C)** | Estimate working temperature from dark current measurements taken with caps on | ... thermistor is unavailable and caps-on darks are available (falls back to "T$_{air}$+2.5°C" if T$_{air}$ < 30°C) |
 
 ---
 
@@ -316,11 +316,11 @@ contributor instead of global class-based contribution, leading to smaller uncer
 
 A summary table:
 
-| Regime                                                      | Description                                                                                                                                                                                                                                                                                             | Recommended if ...                                                      |
-|-------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
-| **Non-FRM, factory calibration only**                       | Basic factory calibration will be used. No uncertainties provided (except a tenative estimate for SeaBird, based on SIRREX-7). Lower quality, non-Fiducial Reference Measurements (FRM).                                                                                                                | ... you lack FidRaDDB-fromatted **calibrations** with uncertainties     | 
-| **FRM Class-Specific characterisations**                    | Calibrations with uncertainties in FidRadDB format will be used. No corrections will be applied to mitigate sensor non-ideal performances (e.g. thermal/angular/polarization dependencies, or device straylight effects). Uncertainties will be estimated (larger compared to the sensor-specific case) | ... you lack sensor-specific **characterizations**                      |       
-| **FRM Sensor-Specific characterisations (highest quality)** | Calibrations AND characterisations in FidRadDB format will be used. Corrections for sensor characteristics will be applied. Uncertainties will be estimated                                                                                                                                             | ... you have sensor-specific **calibrations** and **characterizations** |
+| Regime                                                      | Description                                                                                                                                                                                                                                                                                             | Recommended if ...                                                            |
+|-------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| **Non-FRM, factory calibration only**                       | Basic factory calibration will be used. No uncertainties provided (except a tenative estimate for SeaBird, based on SIRREX-7). Lower quality, non-Fiducial Reference Measurements (FRM).                                                                                                                | ... you lack FidRaDB-fromatted **calibrations** with uncertainties            | 
+| **FRM Class-Specific characterisations**                    | Calibrations with uncertainties in FidRadDB format will be used. No corrections will be applied to mitigate sensor non-ideal performances (e.g. thermal/angular/polarization dependencies, or device straylight effects). Uncertainties will be estimated (larger compared to the sensor-specific case) | ... you lack all sensor-specific **characterizations**                        |       
+| **FRM Sensor-Specific characterisations (highest quality)** | Calibrations AND characterisations in FidRadDB format will be used. Corrections for sensor characteristics will be applied. Uncertainties will be estimated                                                                                                                                             | ... you have all sensor-specific **calibrations** and **characterizations**   |
 
 ---
 
@@ -390,10 +390,10 @@ The same criterion will be applied for LT (water) and LI (sky)
 
 - **Pre- and Post- deployment calibrations: Check consistency, and use closest to acquisition time**
 This option will take user-specified pre-calibrations and post-calibrations and check whether they are compatible metrologically within
-their uncertainties, also considering the expected drift of $1\%/year$. To check this, the following $z-$score will be calculated:
+their uncertainties, also considering the expected drift of $1\%/year$. To check this, the following $E_{n}$-score will be calculated:
 
 $$
-z(r_1,r_2) = \frac{r_1-r_2}{\sqrt{(\Delta r_1)^2+(\Delta r_2)^2 + (2 \times 1\%\overline{r} \times \Delta t )^2}}
+E_{n}(r_1,r_2) = \frac{r_1-r_2}{\sqrt{(\Delta r_1)^2+(\Delta r_2)^2 + (2 \times 1\%\overline{r} \times \Delta t )^2}}
 $$
 
 where:
@@ -405,7 +405,7 @@ where:
 Consistency check will pass if: 
 
 $$
-z(r_1,r_2) < 1,
+E_{n}(r_1,r_2) < 1,
 $$
 
 otherwise, a WARNING will be raised to the user to independently assess the inputted calibrations, and eventually check with the laboratory.
@@ -422,9 +422,14 @@ ES, LT, and LI.
 
 **Multiple characterizations?**
 In the very rare case in which Full FRM cal/char regime is selected and a specific radiometer (e.g. SAM_8329 as in the sample TRIOS case)
-was characterised several times for the same effect, HyperCP will always choose the most recent characterisation 
-(regardless of the field measurement acquisition time). An example would be an ES sensor which was characterised for 
-internal straylight twice, in 2022 and 2025. Then, HyperCP will always consider the 2025 characterisation as the valid one.
+was characterised several times for the same effect, HyperCP will choose the most recent characterisation *prior to field acquisition time*.
+If not available, it will choose the *closest to the field acquisition time*.
+
+An example would be a case in which an ES sensor was characterised for internal straylight twice, in **Jan 2022** and **Jan 2025**:
+
+- If field measurement was acquired in **Dec 2021**, then HyperCP will pick the **Jan 2022** straylight file.
+- If field measurement was acquired in **Dec 2024**, then HyperCP will pick the **Jan 2022** straylight file.
+- If field measurement was acquired in **Jan 2027**, then HyperCP will pick the **Jan 2025** straylight file.
 
 
 | Option                                                                 | Description                                                                                          |
@@ -555,7 +560,6 @@ optimal ensemble periods within that hour will depend on how rapidly conditions 
     glitter from capillary waves. The percentile chosen is sensitive to the sampling rate. The 5% default recommended in
     Hooker et al. 2002 was devised for a multispectral system with rapid sampling rate.
     - **Default**: 5 % (Hooker et al. 2002, Zibordi et al. 2002, Hooker and Morel 2003); <10% (IOCCG Draft Protocols).
-    TODO can this be made compatible with Kevin Ruddick's recommendation of chosing the first 5 scans?
 
 ### L2 Sky/Sunglint Correction (rho) and NIR correction
 
